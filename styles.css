@@ -49,3 +49,10 @@
 .square2:nth-child(2n + 1){
     background-color: rgb(20, 20, 20);
 }
+
+.board > div > img {
+    height: 100px;
+    width: 100px;
+    filter: drop-shadow(3px 0px white)
+    drop-shadow(-3px 0px white);
+}

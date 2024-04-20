@@ -1,0 +1,20 @@
+{
+    "name": "pieces",
+    "blacks": {
+        "pawn": "./assets/bpawn",
+        "rook": "./assets/brook",
+        "king": "./assets/bking",
+        "queen": "./assets/bqueen",
+        "bishop": "./assets/bbishop",
+        "knight": "./assets/bknight"
+    },
+    "whites": {
+        "pawn": "./assets/wpawn",
+        "rook": "./assets/wrook",
+        "king": "./assets/wking",
+        "queen": "./assets/wqueen",
+        "bishop": "./assets/wbishop",
+        "knight": "./assets/wknight"
+    }
+}
+
