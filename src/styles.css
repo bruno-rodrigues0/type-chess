@@ -59,3 +59,6 @@
             drop-shadow(-2px -2px 0 white);
 }
 
+.select{
+    background-color: rgb(239, 120, 102) !important;
+}
