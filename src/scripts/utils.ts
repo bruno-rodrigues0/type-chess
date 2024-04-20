@@ -34,20 +34,26 @@ export function filler(){
     
         if(squares[i].classList.contains('t')){
             piece.setAttribute('src', './assets/wrook.png');
+            piece.setAttribute('name', 'rook');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('k')){
             piece.setAttribute('src', './assets/wknight.png');
+            piece.setAttribute('name', 'knight');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('b')){
             piece.setAttribute('src', './assets/wbishop.png');
+            piece.setAttribute('name', 'bishop');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('ki')){
             piece.setAttribute('src', './assets/wking.png');
+            piece.setAttribute('name', 'king');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('q')){
             piece.setAttribute('src', './assets/wqueen.png');
+            piece.setAttribute('name', 'queen');
             squares[i].appendChild(piece);
         }
+        
     }
     
     for(let i = 55; i > 47; i--){
