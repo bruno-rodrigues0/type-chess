@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;;
+}
+
+.container{
+    background-color: rgb(29, 29, 29);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.game-area{
+    width: 900;
+    height: auto;
+}
+
+.board{
+    width: 800px;
+    height: 800px;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+ 
+.square1{
+    background-color: white;
+    width: calc(800px / 8);
+    height: calc(800px / 8);
+}
+
+.square1:nth-child(2n + 2){
+    background-color: rgb(20, 20, 20);
+}
+
+.square2{
+    background-color: white;
+    width: calc(800px / 8);
+    height: calc(800px / 8);
+}
+
+.square2:nth-child(2n + 1){
+    background-color: rgb(20, 20, 20);
+}
