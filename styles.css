@@ -4,7 +4,7 @@
 }
 
 .container{
-    background-color: rgb(29, 29, 29);
+    background-color: rgb(34, 34, 34);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,8 +13,12 @@
 }
 
 .game-area{
-    width: 900;
+    width: 1000px;
     height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 
 .board{
@@ -22,6 +26,7 @@
     height: 800px;
     display: flex;
     flex-wrap: wrap;
+    box-shadow: 1px 1px 1px black;
 
 }
  
