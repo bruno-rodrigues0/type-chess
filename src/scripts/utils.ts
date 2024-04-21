@@ -44,6 +44,8 @@ export function filler(){
         piece.setAttribute('name', 'pawn');
         squares[i].appendChild(piece);
     }
+
+    
     
     
     for(let i = 63; i > 55; i--){
