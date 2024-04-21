@@ -1,20 +1,22 @@
-import { filler, squares } from "./utils.js";
+import { filler, squares, boardMatrix } from "./utils.js";
 
 filler();
 
 let jogadas = 0;
-let selected : HTMLElement;
+let selectedFrom : number[];
 
-squares.forEach(item => {
-    item.addEventListener('click', () => {
-        for(let i = 0; i < 64; i++){
-            squares[i].classList.remove('select');
-        }
+for(let i = 0; i < 8; i++){
+    boardMatrix[i].forEach((item, index) => {
+        item.addEventListener('click', () => {
+            for(let j = 0; j < 64; j++){
+                squares[j].classList.remove('select-from');
+            }
 
-        item.classList.toggle('select');
-        selected = item;
+            item.classList.toggle('select-from');
+            selectedFrom = [i, index];
+        })
     })
-})
+}
 
 function defineTime() {
     if(jogadas % 2 == 0){
@@ -27,6 +29,10 @@ function defineTime() {
 function move(){
     defineTime();
 
-    let movePiece = selected.tagName;
+    let movePiece = boardMatrix[selectedFrom[0]][selectedFrom[1]].tagName;
+
+    if(movePiece == 'pawn'){
+        
+    }
     
 }
