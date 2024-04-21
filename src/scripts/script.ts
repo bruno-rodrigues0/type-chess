@@ -18,7 +18,12 @@ let pieceInBoard: HTMLElement;
 
 function selectTo(item: HTMLElement, index: number){
     item.appendChild(pieceInBoard);
-    console.log('aqui');
+    for(let j = 0; j < 64; j++){
+        squares[j].classList.remove('select-from');
+        item.removeEventListener('click', moveToHandleClick);
+    }
+
+    reset();
 }
 
 function moveToHandleClick(this: HTMLElement){
@@ -51,20 +56,24 @@ function selectFrom (item: HTMLElement, position: number[]) {
     item.classList.toggle('select-from');
     isSelected = true;
 
-    selectedFrom = [position[0], position[1]];
+    selectedFrom = [position[0]-1, position[1]-1];
     move(selectedFrom);
 }
 
 function handleClick(this: HTMLElement) {
     const item = this;
-    const position : number[] = [parseInt(item.dataset.col as string), parseInt(item.dataset.row as string)];
+    const position : [number, number] = [parseInt(item.dataset.col as string), parseInt(item.dataset.row as string)];
     selectFrom(item, position);
 }
 
-for(let i = 0; i < 8; i++){
-     if(!isSelected){ 
-        boardMatrix[i].forEach((item, index) => {
-            item.addEventListener('click', handleClick);
-        })
+function reset (){
+    for(let i = 0; i < 8; i++){
+        if(!isSelected){ 
+            boardMatrix[i].forEach((item, index) => {
+                item.addEventListener('click', handleClick);
+            })
+        }
     }
 }
+
+reset();
