@@ -95,6 +95,22 @@ function moveRook(selectedFrom: number[]){
     }
 }
 
+function moveKing(selectedFrom: number[]){
+    pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
+
+    boardMatrix[selectedFrom[1]-1][selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]-1][selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]+1][selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]+1][selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
+
+    boardMatrix[selectedFrom[1]-1][selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]+1][selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
+
+    boardMatrix[selectedFrom[1]][selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]][selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
+
+}
+
 
 function selectFrom (item: HTMLElement, position: number[], pieceName?: string) {
 
@@ -135,6 +151,11 @@ function selectFrom (item: HTMLElement, position: number[], pieceName?: string) 
         case 'rook':
             console.log('rook');
             moveRook(selectedFrom);
+            break;
+
+        case 'king':
+            console.log('king');
+            moveKing(selectedFrom);
             break;
 
         default:
