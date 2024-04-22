@@ -20,7 +20,7 @@ function selectTo(item: HTMLElement){
     item.appendChild(pieceInBoard);
     for(let j = 0; j < 64; j++){
         squares[j].classList.remove('select-from');
-        item.removeEventListener('click', moveToHandleClick);
+        squares[j].removeEventListener('click', moveToHandleClick);
     }
 }
 
@@ -30,7 +30,7 @@ function moveToHandleClick(this: HTMLElement){
     selectTo(item);
 }
 
-// piece moves 
+// funções de movimento das peças
 
 function movePawn(selectedFrom: number[]){
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
@@ -39,7 +39,13 @@ function movePawn(selectedFrom: number[]){
 }
 
 function moveBishop(selectedFrom: number[]){
-    
+    pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
+    for(let i = 0; i < 8; i++){
+        boardMatrix[selectedFrom[1]-i][selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]-i][selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]+i][selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]+i][selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+    }
 }
 
 
