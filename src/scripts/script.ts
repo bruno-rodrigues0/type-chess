@@ -69,6 +69,22 @@ function moveQueen(selectedFrom: number[]){
     }
 }
 
+function moveKnight(selectedFrom: number[]){
+    pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
+    
+    //pra cima
+    boardMatrix[selectedFrom[1]-2][selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]-2][selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]-1][selectedFrom[0]-2]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]-1][selectedFrom[0]+2]?.addEventListener('click', moveToHandleClick);
+    
+    //pra baixo
+    boardMatrix[selectedFrom[1]+2][selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]+2][selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]+1][selectedFrom[0]-2]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]+1][selectedFrom[0]+2]?.addEventListener('click', moveToHandleClick);
+}
+
 
 function selectFrom (item: HTMLElement, position: number[], pieceName?: string) {
 
@@ -90,14 +106,22 @@ function selectFrom (item: HTMLElement, position: number[], pieceName?: string) 
             console.log('pawn')
             movePawn(selectedFrom);
             break;
+
         case 'bishop':
             console.log('bishop');
             moveBishop(selectedFrom);
             break;
+
         case 'queen':
             console.log('queen');
             moveQueen(selectedFrom);
             break;
+
+        case 'knight':
+            console.log('knight');
+            moveKnight(selectedFrom);
+            break;
+
         default:
             break;
     }   
