@@ -1,3 +1,4 @@
+import { HtmlContext } from "../../../../node_modules/next/dist/server/future/route-modules/app-page/vendored/contexts/entrypoints.js";
 import { filler, squares, boardMatrix } from "./utils.js";
 
 filler();
@@ -16,8 +17,12 @@ let pieceInBoard: HTMLElement;
 //     }
 // }
 
+let audio = document.querySelector('audio') as HTMLAudioElement;
+
 function selectTo(item: HTMLElement){
     item.appendChild(pieceInBoard);
+    audio.play();
+
     for(let j = 0; j < 64; j++){
         squares[j].classList.remove('select-from');
         squares[j].removeEventListener('click', moveToHandleClick);
@@ -48,6 +53,22 @@ function moveBishop(selectedFrom: number[]){
     }
 }
 
+function moveQueen(selectedFrom: number[]){
+    pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
+    for(let i = 0; i < 8; i++){
+        boardMatrix[selectedFrom[1]-i][selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]-i][selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]+i][selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]+i][selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+
+        boardMatrix[selectedFrom[1]-i][selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]+i][selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
+
+        boardMatrix[selectedFrom[1]][selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]][selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+    }
+}
+
 
 function selectFrom (item: HTMLElement, position: number[], pieceName?: string) {
 
@@ -72,8 +93,11 @@ function selectFrom (item: HTMLElement, position: number[], pieceName?: string) 
         case 'bishop':
             console.log('bishop');
             moveBishop(selectedFrom);
-            break
-
+            break;
+        case 'queen':
+            console.log('queen');
+            moveQueen(selectedFrom);
+            break;
         default:
             break;
     }   
