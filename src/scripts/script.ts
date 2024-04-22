@@ -1,8 +1,6 @@
-import { HtmlContext } from "../../../../node_modules/next/dist/server/future/route-modules/app-page/vendored/contexts/entrypoints.js";
 import { filler, squares, boardMatrix } from "./utils.js";
 
 filler();
-
 
 let pieceInBoard: HTMLElement;
 
