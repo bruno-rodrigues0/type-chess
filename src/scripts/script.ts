@@ -2,7 +2,7 @@ import { filler, squares, boardMatrix } from "./utils.js";
 
 filler();
 
-let isSelected = false;
+
 let pieceInBoard: HTMLElement;
 
 // let jogadas = 0;
@@ -16,64 +16,72 @@ let pieceInBoard: HTMLElement;
 //     }
 // }
 
-function selectTo(item: HTMLElement, index: number){
+function selectTo(item: HTMLElement){
     item.appendChild(pieceInBoard);
     for(let j = 0; j < 64; j++){
         squares[j].classList.remove('select-from');
         item.removeEventListener('click', moveToHandleClick);
     }
-
-    reset();
 }
 
 function moveToHandleClick(this: HTMLElement){
     const item = this;
     const index = parseInt(item.dataset.col as string);
-    selectTo(item, index);
+    selectTo(item);
 }
 
-function move(selectedFrom: number[]){
-    pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
+// piece moves 
 
-    boardMatrix[selectedFrom[1]-1].forEach((item, index) => {
-    item.addEventListener('click', moveToHandleClick);
-    })
+function movePawn(selectedFrom: number[]){
+    pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
+    boardMatrix[selectedFrom[1]-1][selectedFrom[0]].addEventListener('click', moveToHandleClick);
+  
+}
+
+function moveBishop(selectedFrom: number[]){
     
 }
 
-function selectFrom (item: HTMLElement, position: number[]) {
+
+function selectFrom (item: HTMLElement, position: number[], pieceName?: string) {
 
     if(!item.childElementCount){
         return;
     }
     for(let j = 0; j < 64; j++){
         squares[j].classList.remove('select-from');
-        squares[j].removeEventListener('click', handleClick);
     }
     
     let selectedFrom : number[];
     
     item.classList.toggle('select-from');
-    isSelected = true;
 
     selectedFrom = [position[0]-1, position[1]-1];
-    move(selectedFrom);
+
+    switch (pieceName){
+        case 'pawn':
+            console.log('pawn')
+            movePawn(selectedFrom);
+            break;
+        case 'bishop':
+            console.log('bishop');
+            moveBishop(selectedFrom);
+            break
+
+        default:
+            break;
+    }   
 }
 
 function handleClick(this: HTMLElement) {
     const item = this;
     const position : [number, number] = [parseInt(item.dataset.col as string), parseInt(item.dataset.row as string)];
-    selectFrom(item, position);
+    const pieceName = item.firstElementChild?.id;
+    selectFrom(item, position, pieceName);
 }
 
-function reset (){
-    for(let i = 0; i < 8; i++){
-        if(!isSelected){ 
-            boardMatrix[i].forEach((item, index) => {
-                item.addEventListener('click', handleClick);
-            })
-        }
-    }
+for(let i = 0; i < 8; i++){
+    boardMatrix[i].forEach((item) => {
+        item.addEventListener('click', handleClick);
+    })
 }
-
-reset();

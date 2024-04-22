@@ -17,23 +17,23 @@ export function filler(){
     
         if(squares[i].classList.contains('t')){
             piece.setAttribute('src', './assets/brook.png');
-            piece.setAttribute('name', 'rook');
+            piece.setAttribute('id', 'rook');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('k')){
             piece.setAttribute('src', './assets/bknight.png');
-            piece.setAttribute('name', 'knight');
+            piece.setAttribute('id', 'knight');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('b')){
             piece.setAttribute('src', './assets/bbishop.png');
-            piece.setAttribute('name', 'bishop');
+            piece.setAttribute('id', 'bishop');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('ki')){
             piece.setAttribute('src', './assets/bking.png');
-            piece.setAttribute('name', 'king');
+            piece.setAttribute('id', 'king');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('q')){
             piece.setAttribute('src', './assets/bqueen.png');
-            piece.setAttribute('name', 'queen');
+            piece.setAttribute('id', 'queen');
             squares[i].appendChild(piece);
         }
     }
@@ -41,7 +41,7 @@ export function filler(){
     for(let i = 8; i < 16; i++){
         let piece : HTMLElement = document.createElement('img');
         piece.setAttribute('src', './assets/bpawn.png');
-        piece.setAttribute('name', 'pawn');
+        piece.setAttribute('id', 'pawn');
         squares[i].appendChild(piece);
     }
 
@@ -53,23 +53,23 @@ export function filler(){
     
         if(squares[i].classList.contains('t')){
             piece.setAttribute('src', './assets/wrook.png');
-            piece.setAttribute('name', 'rook');
+            piece.setAttribute('id', 'rook');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('k')){
             piece.setAttribute('src', './assets/wknight.png');
-            piece.setAttribute('name', 'knight');
+            piece.setAttribute('id', 'knight');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('b')){
             piece.setAttribute('src', './assets/wbishop.png');
-            piece.setAttribute('name', 'bishop');
+            piece.setAttribute('id', 'bishop');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('ki')){
             piece.setAttribute('src', './assets/wking.png');
-            piece.setAttribute('name', 'king');
+            piece.setAttribute('id', 'king');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('q')){
             piece.setAttribute('src', './assets/wqueen.png');
-            piece.setAttribute('name', 'queen');
+            piece.setAttribute('id', 'queen');
             squares[i].appendChild(piece);
         }
         
@@ -78,7 +78,7 @@ export function filler(){
     for(let i = 55; i > 47; i--){
         let piece : HTMLElement = document.createElement('img');
         piece.setAttribute('src', './assets/wpawn.png');
-        piece.setAttribute('name', 'pawn');
+        piece.setAttribute('id', 'pawn');
         squares[i].appendChild(piece);
     }
 }
