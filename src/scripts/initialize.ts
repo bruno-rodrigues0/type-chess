@@ -18,22 +18,27 @@ export function filler(){
         if(squares[i].classList.contains('t')){
             piece.setAttribute('src', './assets/brook.png');
             piece.setAttribute('id', 'rook');
+            piece.setAttribute('class', 'black');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('k')){
             piece.setAttribute('src', './assets/bknight.png');
             piece.setAttribute('id', 'knight');
+            piece.setAttribute('class', 'black');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('b')){
             piece.setAttribute('src', './assets/bbishop.png');
             piece.setAttribute('id', 'bishop');
+            piece.setAttribute('class', 'black');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('ki')){
             piece.setAttribute('src', './assets/bking.png');
             piece.setAttribute('id', 'king');
+            piece.setAttribute('class', 'black');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('q')){
             piece.setAttribute('src', './assets/bqueen.png');
             piece.setAttribute('id', 'queen');
+            piece.setAttribute('class', 'black');
             squares[i].appendChild(piece);
         }
     }
@@ -42,34 +47,40 @@ export function filler(){
         let piece : HTMLElement = document.createElement('img');
         piece.setAttribute('src', './assets/bpawn.png');
         piece.setAttribute('id', 'pawn');
+        piece.setAttribute('class', 'black');
         squares[i].appendChild(piece);
     }
-
+    
     
     
     
     for(let i = 63; i > 55; i--){
         let piece : HTMLElement = document.createElement('img');
-    
+        
         if(squares[i].classList.contains('t')){
             piece.setAttribute('src', './assets/wrook.png');
             piece.setAttribute('id', 'rook');
+            piece.setAttribute('class', 'white');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('k')){
             piece.setAttribute('src', './assets/wknight.png');
             piece.setAttribute('id', 'knight');
+            piece.setAttribute('class', 'white');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('b')){
             piece.setAttribute('src', './assets/wbishop.png');
             piece.setAttribute('id', 'bishop');
+            piece.setAttribute('class', 'white');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('ki')){
             piece.setAttribute('src', './assets/wking.png');
             piece.setAttribute('id', 'king');
+            piece.setAttribute('class', 'white');
             squares[i].appendChild(piece);
         } else if(squares[i].classList.contains('q')){
             piece.setAttribute('src', './assets/wqueen.png');
             piece.setAttribute('id', 'queen');
+            piece.setAttribute('class', 'white');
             squares[i].appendChild(piece);
         }
         
@@ -79,6 +90,7 @@ export function filler(){
         let piece : HTMLElement = document.createElement('img');
         piece.setAttribute('src', './assets/wpawn.png');
         piece.setAttribute('id', 'pawn');
+        piece.setAttribute('class', 'white');
         squares[i].appendChild(piece);
     }
 }

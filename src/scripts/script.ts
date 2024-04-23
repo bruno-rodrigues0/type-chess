@@ -1,17 +1,9 @@
 import { filler, squares, boardMatrix } from "./initialize.js";
-import { moveBishop, moveKing, moveKnight, movePawn, moveQueen, moveRook} from "./moves.js";
+import { moveBishop, moveKing, moveKnight, movePawn, moveQueen, moveRook, defineTime} from "./moves.js";
 
 filler();
 
-// let jogadas = 0;
 
-// function defineTime() {
-//     if(jogadas % 2 == 0){
-//         return 'brancas';
-//     } else {
-//         return 'pretas';
-//     }
-// }
 
 function selectFrom (item: HTMLElement, position: number[], pieceName?: string) {
 
@@ -71,8 +63,24 @@ function handleClick(this: HTMLElement) {
     selectFrom(item, position, pieceName);
 }
 
-for(let i = 0; i < 8; i++){
-    boardMatrix[i].forEach((item) => {
-        item.addEventListener('click', handleClick);
-    })
+export function reset(){
+    if(defineTime() === 'white'){
+        for(let i = 0; i < 8; i++){
+            boardMatrix[i].forEach((item) => {
+                item.firstElementChild?.classList.contains('white') 
+                    ? item.addEventListener('click', handleClick)
+                    : item.removeEventListener('click', handleClick)
+            })
+        }
+    } else if (defineTime() === 'black'){
+        for(let i = 0; i < 8; i++){
+            boardMatrix[i].forEach((item) => {
+                item.firstElementChild?.classList.contains('black') 
+                    ? item.addEventListener('click', handleClick)
+                    : item.removeEventListener('click', handleClick)
+            })
+        }
+    }
 }
+reset();
+    

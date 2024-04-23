@@ -1,21 +1,37 @@
 import { boardMatrix, squares } from "./initialize.js";
+import { reset } from "./script.js";
 
 let pieceInBoard: HTMLElement;
-let audio = document.querySelector('audio') as HTMLAudioElement;
+let audio = document.querySelector('audio') as HTMLAudioElement; // elemento de audio no html
+
+let jogadas = 0;
+
+export function defineTime() {
+    if(jogadas % 2 == 0){
+        return 'white';
+    } else {
+        return 'black';
+    }
+}
 
 export function selectTo(item: HTMLElement){
-    if (item.childElementCount){
-        let pieceInLocal = item.firstChild as HTMLElement;
-        item.removeChild(pieceInLocal);
-    } 
+    if(
+        (item.firstElementChild?.classList.contains('black') && pieceInBoard.classList.contains('black'))
+        || (item.firstElementChild?.classList.contains('white') && pieceInBoard.classList.contains('white'))
+    ){
+        return;
+    }
     
     item.appendChild(pieceInBoard);
-    audio.play();
+    audio.play(); // toca o audio ao mover uma peça
+    jogadas++;
     
     for(let j = 0; j < 64; j++){
         squares[j].classList.remove('select-from');
         squares[j].removeEventListener('click', moveToHandleClick);
     }
+
+    reset();
 }
 
 export function moveToHandleClick(this: HTMLElement){
@@ -25,11 +41,17 @@ export function moveToHandleClick(this: HTMLElement){
 
 // funções de movimento das peças
 
+
 export function movePawn(selectedFrom: number[]){
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
-    boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]].addEventListener('click', moveToHandleClick);
-  
+
+    if(pieceInBoard.classList.contains('white')){
+        boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]].addEventListener('click', moveToHandleClick);
+    } else if (pieceInBoard.classList.contains('black')){
+        boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0]].addEventListener('click', moveToHandleClick);
+    }
 }
+
 
 export function moveBishop(selectedFrom: number[]){
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
