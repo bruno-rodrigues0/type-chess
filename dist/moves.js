@@ -27,6 +27,7 @@ export function selectTo(item) {
             ? deathsw?.appendChild(child)
             : deathsb?.appendChild(child);
     }
+    pieceInBoard.classList.add('moved');
     item.appendChild(pieceInBoard);
     audio.play(); // toca o audio ao mover uma peça
     jogadas++;
@@ -43,7 +44,7 @@ export function moveToHandleClick() {
 // funções de movimento das peças
 export function movePawn(selectedFrom) {
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild;
-    if (pieceInBoard.classList.contains('white')) {
+    if (pieceInBoard.classList.contains('white') && pieceInBoard.classList.contains('moved')) {
         if (!(boardMatrix[selectedFrom[1] - 1]?.[selectedFrom[0]]?.childElementCount)) {
             boardMatrix[selectedFrom[1] - 1]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
         }
@@ -54,7 +55,7 @@ export function movePawn(selectedFrom) {
             boardMatrix[selectedFrom[1] - 1]?.[selectedFrom[0] - 1]?.addEventListener('click', moveToHandleClick);
         }
     }
-    else if (pieceInBoard.classList.contains('black')) {
+    else if (pieceInBoard.classList.contains('black') && pieceInBoard.classList.contains('moved')) {
         if (!(boardMatrix[selectedFrom[1] + 1]?.[selectedFrom[0]].childElementCount)) {
             boardMatrix[selectedFrom[1] + 1]?.[selectedFrom[0]].addEventListener('click', moveToHandleClick);
         }
@@ -63,6 +64,18 @@ export function movePawn(selectedFrom) {
         }
         if (boardMatrix[selectedFrom[1] + 1]?.[selectedFrom[0] - 1]?.firstElementChild?.classList.contains('white')) {
             boardMatrix[selectedFrom[1] + 1]?.[selectedFrom[0] - 1]?.addEventListener('click', moveToHandleClick);
+        }
+    }
+    else if (pieceInBoard.classList.contains('white')) {
+        if (!(boardMatrix[selectedFrom[1] - 1]?.[selectedFrom[0]]?.childElementCount)) {
+            boardMatrix[selectedFrom[1] - 1]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
+            boardMatrix[selectedFrom[1] - 2]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
+        }
+    }
+    else if (pieceInBoard.classList.contains('black')) {
+        if (!(boardMatrix[selectedFrom[1] + 1]?.[selectedFrom[0]]?.childElementCount)) {
+            boardMatrix[selectedFrom[1] + 1]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
+            boardMatrix[selectedFrom[1] + 2]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
         }
     }
 }
