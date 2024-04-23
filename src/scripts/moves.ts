@@ -56,11 +56,34 @@ export function moveToHandleClick(this: HTMLElement){
 export function movePawn(selectedFrom: number[]){
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
 
+   
     if(pieceInBoard.classList.contains('white')){
-        boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]].addEventListener('click', moveToHandleClick);
+        if (!(boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]].childElementCount)){
+            boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]].addEventListener('click', moveToHandleClick);
+        }
+
+        if(boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0] + 1].firstElementChild?.classList.contains('black')){
+            boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0] + 1].addEventListener('click', moveToHandleClick);
+        }
+
+        if(boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0] - 1].firstElementChild?.classList.contains('black')){
+            boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0] - 1].addEventListener('click', moveToHandleClick);
+        }
+
     } else if (pieceInBoard.classList.contains('black')){
-        boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0]].addEventListener('click', moveToHandleClick);
-    }
+        if (!(boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0]].childElementCount)){
+            boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0]].addEventListener('click', moveToHandleClick);
+        } 
+
+        if(boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0] + 1].firstElementChild?.classList.contains('white')){
+            boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0] + 1].addEventListener('click', moveToHandleClick);
+        }
+
+        if(boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0] - 1].firstElementChild?.classList.contains('white')){
+            boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0] - 1].addEventListener('click', moveToHandleClick);
+        }  
+    } 
+        
 }
 
 
