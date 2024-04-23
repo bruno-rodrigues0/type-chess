@@ -58,16 +58,16 @@ export function movePawn(selectedFrom: number[]){
 
    
     if(pieceInBoard.classList.contains('white')){
-        if (!(boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]].childElementCount)){
-            boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]].addEventListener('click', moveToHandleClick);
+        if (!(boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]]?.childElementCount)){
+            boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
         }
 
-        if(boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0] + 1].firstElementChild?.classList.contains('black')){
-            boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0] + 1].addEventListener('click', moveToHandleClick);
+        if(boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0] + 1]?.firstElementChild?.classList.contains('black')){
+            boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0] + 1]?.addEventListener('click', moveToHandleClick);
         }
 
-        if(boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0] - 1].firstElementChild?.classList.contains('black')){
-            boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0] - 1].addEventListener('click', moveToHandleClick);
+        if(boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0] - 1]?.firstElementChild?.classList.contains('black')){
+            boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0] - 1]?.addEventListener('click', moveToHandleClick);
         }
 
     } else if (pieceInBoard.classList.contains('black')){
@@ -75,12 +75,12 @@ export function movePawn(selectedFrom: number[]){
             boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0]].addEventListener('click', moveToHandleClick);
         } 
 
-        if(boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0] + 1].firstElementChild?.classList.contains('white')){
-            boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0] + 1].addEventListener('click', moveToHandleClick);
+        if(boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0] + 1]?.firstElementChild?.classList.contains('white')){
+            boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0] + 1]?.addEventListener('click', moveToHandleClick);
         }
 
-        if(boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0] - 1].firstElementChild?.classList.contains('white')){
-            boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0] - 1].addEventListener('click', moveToHandleClick);
+        if(boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0] - 1]?.firstElementChild?.classList.contains('white')){
+            boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0] - 1]?.addEventListener('click', moveToHandleClick);
         }  
     } 
         
@@ -89,27 +89,136 @@ export function movePawn(selectedFrom: number[]){
 
 export function moveBishop(selectedFrom: number[]){
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
-    
-    for(let i = 0; i < 8; i++){
-        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+
+    let cimaEsquerda = false;
+    let cimaDireita = false;
+    let baixoEsquerda = false;
+    let baixoDireita = false;
+
+    for(let i = 1; i < 8; i++){
+        if(pieceInBoard.classList.contains('white')){
+            
+            boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]-i]?.firstElementChild?.classList.contains('white') ? cimaEsquerda = true : '';boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]+i]?.firstElementChild?.classList.contains('white') ? cimaDireita = true : ''
+            boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]-i]?.firstElementChild?.classList.contains('white') ? baixoEsquerda = true : '';
+            boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]+i]?.firstElementChild?.classList.contains('white') ? baixoDireita = true : '';
+
+            if(!cimaEsquerda){
+                boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!cimaDireita){
+                boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!baixoEsquerda){
+                boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!baixoDireita){
+                boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+            }
+         } else {
+
+            boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]-i]?.firstElementChild?.classList.contains('black') ? cimaEsquerda = true : '';boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]+i]?.firstElementChild?.classList.contains('black') ? cimaDireita = true : ''
+            boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]-i]?.firstElementChild?.classList.contains('black') ? baixoEsquerda = true : '';
+            boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]+i]?.firstElementChild?.classList.contains('black') ? baixoDireita = true : '';
+
+            if(!cimaEsquerda){
+                boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!cimaDireita){
+                boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!baixoEsquerda){
+                boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!baixoDireita){
+                boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+            }
+         }
+
     }
 }
 
 export function moveQueen(selectedFrom: number[]){
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
+
+    let cima = false;
+    let baixo = false;
+    let direita = false;
+    let esquerda = false;
+    let cimaEsquerda = false;
+    let cimaDireita = false;
+    let baixoEsquerda = false;
+    let baixoDireita = false;
     
-    for(let i = 0; i < 8; i++){
-        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);    
-        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+    for(let i = 1; i < 8; i++){
+
+        if(pieceInBoard.classList.contains('white')){
+         
+            boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]]?.firstElementChild?.classList.contains('white') ? cima = true : '';
+            boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]]?.firstElementChild?.classList.contains('white') ? baixo = true : '';
+            boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-i]?.firstElementChild?.classList.contains('white') ? esquerda = true : '';
+            boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+i]?.firstElementChild?.classList.contains('white') ? direita = true : '';
+            boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]-i]?.firstElementChild?.classList.contains('white') ? cimaEsquerda = true : '';boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]+i]?.firstElementChild?.classList.contains('white') ? cimaDireita = true : ''
+            boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]-i]?.firstElementChild?.classList.contains('white') ? baixoEsquerda = true : '';
+            boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]+i]?.firstElementChild?.classList.contains('white') ? baixoDireita = true : '';
+         
+            if(!cima){
+                boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);   
+            }
+            if(!baixo){
+                boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!esquerda){
+                boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!direita){
+                boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!cimaEsquerda){
+                boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!cimaDireita){
+                boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!baixoEsquerda){
+                boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!baixoDireita){
+                boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+            }
+        } else {
+            boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]]?.firstElementChild?.classList.contains('black') ? cima = true : '';
+            boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]]?.firstElementChild?.classList.contains('black') ? baixo = true : '';
+            boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-i]?.firstElementChild?.classList.contains('black') ? esquerda = true : '';
+            boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+i]?.firstElementChild?.classList.contains('black') ? direita = true : '';
+            boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]-i]?.firstElementChild?.classList.contains('black') ? cimaEsquerda = true : '';boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]+i]?.firstElementChild?.classList.contains('black') ? cimaDireita = true : ''
+            boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]-i]?.firstElementChild?.classList.contains('black') ? baixoEsquerda = true : '';
+            boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]+i]?.firstElementChild?.classList.contains('black') ? baixoDireita = true : '';
+         
+            if(!cima){
+                boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);   
+            }
+            if(!baixo){
+                boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!esquerda){
+                boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!direita){
+                boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!cimaEsquerda){
+                boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!cimaDireita){
+                boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!baixoEsquerda){
+                boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!baixoDireita){
+                boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+            }
+        }
     }
 }
 
@@ -131,11 +240,50 @@ export function moveKnight(selectedFrom: number[]){
 
 export function moveRook(selectedFrom: number[]){    
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
-    for(let i = 0; i < 9; i++){
-        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+    
+    let cima = false;
+    let baixo = false;
+    let direita = false;
+    let esquerda = false;
+
+    for(let i = 1; i < 9; i++){
+        if(pieceInBoard.classList.contains('white')){
+            boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]]?.firstElementChild?.classList.contains('white') ? cima = true : '';
+            boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]]?.firstElementChild?.classList.contains('white') ? baixo = true : '';
+            boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-i]?.firstElementChild?.classList.contains('white') ? esquerda = true : '';
+            boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+i]?.firstElementChild?.classList.contains('white') ? direita = true : '';
+
+            if(!cima){
+                boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);   
+            }
+            if(!baixo){
+                boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!esquerda){
+                boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!direita){
+                boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+            }
+        } else {
+            boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]]?.firstElementChild?.classList.contains('black') ? cima = true : '';
+            boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]]?.firstElementChild?.classList.contains('black') ? baixo = true : '';
+            boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-i]?.firstElementChild?.classList.contains('black') ? esquerda = true : '';
+            boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+i]?.firstElementChild?.classList.contains('black') ? direita = true : '';
+
+            if(!cima){
+                boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);   
+            }
+            if(!baixo){
+                boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!esquerda){
+                boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+            }
+            if(!direita){
+                boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+            }
+        }
     }
 }
 
