@@ -4,7 +4,7 @@
 }
 
 .container{
-    background-color: rgb(34, 34, 34);
+    background-color: rgb(50, 52, 55);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,7 +36,7 @@
 }
 
 .square1:nth-child(2n + 2){
-    background-color: rgb(20, 20, 20);
+    background-color: rgb(32, 32, 32);
 }
 
 .deathsw, .deathsb{
@@ -45,7 +45,10 @@
     align-items: center;
     justify-content: center;
 }
-
+.deathsw > img, .deathsb > img{
+    width: 45px;
+    height: 45px;
+}
 .square2{
     background-color: white;
     width: calc(800px / 8);
@@ -53,7 +56,7 @@
 }
 
 .square2:nth-child(2n + 1){
-    background-color: rgb(20, 20, 20);
+    background-color: rgb(32, 32, 32);
 }
 
 img {
