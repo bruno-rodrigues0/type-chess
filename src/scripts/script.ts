@@ -29,7 +29,6 @@ function selectTo(item: HTMLElement){
 
 function moveToHandleClick(this: HTMLElement){
     const item = this;
-    const index = parseInt(item.dataset.col as string);
     selectTo(item);
 }
 
@@ -37,33 +36,41 @@ function moveToHandleClick(this: HTMLElement){
 
 function movePawn(selectedFrom: number[]){
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
-    boardMatrix[selectedFrom[1]-1][selectedFrom[0]].addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]].addEventListener('click', moveToHandleClick);
   
 }
 
 function moveBishop(selectedFrom: number[]){
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
+    
     for(let i = 0; i < 8; i++){
-        boardMatrix[selectedFrom[1]-i][selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]-i][selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]+i][selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]+i][selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+          
+        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
     }
 }
 
 function moveQueen(selectedFrom: number[]){
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
+    
     for(let i = 0; i < 8; i++){
-        boardMatrix[selectedFrom[1]-i][selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]-i][selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]+i][selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]+i][selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+        
+ 
+        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
+    
 
-        boardMatrix[selectedFrom[1]-i][selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]+i][selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
-
-        boardMatrix[selectedFrom[1]][selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]][selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+    
+        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+        
+        boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+        
     }
 }
 
@@ -71,41 +78,41 @@ function moveKnight(selectedFrom: number[]){
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
     
     //pra cima
-    boardMatrix[selectedFrom[1]-2][selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]-2][selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]-1][selectedFrom[0]-2]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]-1][selectedFrom[0]+2]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]-2]?.[selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]-2]?.[selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]-2]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]+2]?.addEventListener('click', moveToHandleClick);
     
     //pra baixo
-    boardMatrix[selectedFrom[1]+2][selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]+2][selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]+1][selectedFrom[0]-2]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]+1][selectedFrom[0]+2]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]+2]?.[selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]+2]?.[selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0]-2]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0]+2]?.addEventListener('click', moveToHandleClick);
 }
 
 function moveRook(selectedFrom: number[]){    
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
-    for(let i = 0; i < 8; i++){
-        boardMatrix[selectedFrom[1]-i][selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]+i][selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]][selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]][selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
+    for(let i = 0; i < 9; i++){
+
+        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
+        
+        boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
+        boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
     }
 }
 
 function moveKing(selectedFrom: number[]){
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
 
-    boardMatrix[selectedFrom[1]-1][selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]-1][selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]+1][selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]+1][selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
-
-    boardMatrix[selectedFrom[1]-1][selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]+1][selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
-
-    boardMatrix[selectedFrom[1]][selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]][selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
+    boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
 
 }
 
