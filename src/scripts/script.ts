@@ -3,8 +3,6 @@ import { moveBishop, moveKing, moveKnight, movePawn, moveQueen, moveRook, define
 
 filler();
 
-
-
 function selectFrom (item: HTMLElement, position: number[], pieceName?: string) {
 
     if(!item.childElementCount){
@@ -63,7 +61,7 @@ function handleClick(this: HTMLElement) {
     selectFrom(item, position, pieceName);
 }
 
-export function reset(){
+export function abbleToMove(){
     if(defineTime() === 'white'){
         for(let i = 0; i < 8; i++){
             boardMatrix[i].forEach((item) => {
@@ -82,5 +80,5 @@ export function reset(){
         }
     }
 }
-reset();
+abbleToMove();
     
