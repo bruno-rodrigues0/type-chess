@@ -1,11 +1,9 @@
-import { filler, squares, boardMatrix } from "./utils.js";
+import { filler, squares, boardMatrix } from "./initialize.js";
+import { moveBishop, moveKing, moveKnight, movePawn, moveQueen, moveRook} from "./moves.js";
 
 filler();
 
-let pieceInBoard: HTMLElement;
-
 // let jogadas = 0;
-
 
 // function defineTime() {
 //     if(jogadas % 2 == 0){
@@ -14,108 +12,6 @@ let pieceInBoard: HTMLElement;
 //         return 'pretas';
 //     }
 // }
-
-let audio = document.querySelector('audio') as HTMLAudioElement;
-
-function selectTo(item: HTMLElement){
-    item.appendChild(pieceInBoard);
-    audio.play();
-
-    for(let j = 0; j < 64; j++){
-        squares[j].classList.remove('select-from');
-        squares[j].removeEventListener('click', moveToHandleClick);
-    }
-}
-
-function moveToHandleClick(this: HTMLElement){
-    const item = this;
-    selectTo(item);
-}
-
-// funções de movimento das peças
-
-function movePawn(selectedFrom: number[]){
-    pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
-    boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]].addEventListener('click', moveToHandleClick);
-  
-}
-
-function moveBishop(selectedFrom: number[]){
-    pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
-    
-    for(let i = 0; i < 8; i++){
-          
-        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
-    }
-}
-
-function moveQueen(selectedFrom: number[]){
-    pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
-    
-    for(let i = 0; i < 8; i++){
-        
- 
-        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
-    
-
-    
-        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
-        
-        boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
-        
-    }
-}
-
-function moveKnight(selectedFrom: number[]){
-    pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
-    
-    //pra cima
-    boardMatrix[selectedFrom[1]-2]?.[selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]-2]?.[selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]-2]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]+2]?.addEventListener('click', moveToHandleClick);
-    
-    //pra baixo
-    boardMatrix[selectedFrom[1]+2]?.[selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]+2]?.[selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0]-2]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0]+2]?.addEventListener('click', moveToHandleClick);
-}
-
-function moveRook(selectedFrom: number[]){    
-    pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
-    for(let i = 0; i < 9; i++){
-
-        boardMatrix[selectedFrom[1]-i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]+i]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
-        
-        boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-i]?.addEventListener('click', moveToHandleClick);
-        boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+i]?.addEventListener('click', moveToHandleClick);
-    }
-}
-
-function moveKing(selectedFrom: number[]){
-    pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
-
-    boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]-1]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
-    boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
-
-}
-
 
 function selectFrom (item: HTMLElement, position: number[], pieceName?: string) {
 
