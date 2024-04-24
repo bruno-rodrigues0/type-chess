@@ -43,6 +43,9 @@ export function moveToHandleClick() {
 }
 // funções de movimento das peças
 export function movePawn(selectedFrom) {
+    for (let j = 0; j < 64; j++) {
+        squares[j].removeEventListener('click', moveToHandleClick);
+    }
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild;
     if (pieceInBoard.classList.contains('white') && pieceInBoard.classList.contains('moved')) {
         if (!(boardMatrix[selectedFrom[1] - 1]?.[selectedFrom[0]]?.childElementCount)) {
@@ -80,6 +83,9 @@ export function movePawn(selectedFrom) {
     }
 }
 export function moveBishop(selectedFrom) {
+    for (let j = 0; j < 64; j++) {
+        squares[j].removeEventListener('click', moveToHandleClick);
+    }
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild;
     let cimaEsquerda = false;
     let cimaDireita = false;
@@ -125,6 +131,9 @@ export function moveBishop(selectedFrom) {
     }
 }
 export function moveQueen(selectedFrom) {
+    for (let j = 0; j < 64; j++) {
+        squares[j].removeEventListener('click', moveToHandleClick);
+    }
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild;
     let cima = false;
     let baixo = false;
@@ -206,6 +215,9 @@ export function moveQueen(selectedFrom) {
     }
 }
 export function moveKnight(selectedFrom) {
+    for (let j = 0; j < 64; j++) {
+        squares[j].removeEventListener('click', moveToHandleClick);
+    }
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild;
     //pra cima
     boardMatrix[selectedFrom[1] - 2]?.[selectedFrom[0] - 1]?.addEventListener('click', moveToHandleClick);
@@ -219,6 +231,9 @@ export function moveKnight(selectedFrom) {
     boardMatrix[selectedFrom[1] + 1]?.[selectedFrom[0] + 2]?.addEventListener('click', moveToHandleClick);
 }
 export function moveRook(selectedFrom) {
+    for (let j = 0; j < 64; j++) {
+        squares[j].removeEventListener('click', moveToHandleClick);
+    }
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild;
     let cima = false;
     let baixo = false;
@@ -263,22 +278,53 @@ export function moveRook(selectedFrom) {
         }
     }
 }
-function castlingMove(newKingPosition, rook) {
+function castlingLHandleClick() {
+    let newKingPosition = this;
+    let rook;
+    pieceInBoard.firstElementChild?.classList.contains('white')
+        ? rook = boardMatrix[7][0].firstElementChild
+        : rook = boardMatrix[0][0].firstElementChild;
+    castlingLMove(newKingPosition, rook);
+}
+function castlingRHandleClick() {
+    let newKingPosition = this;
+    let rook;
+    pieceInBoard.classList.contains('white')
+        ? rook = boardMatrix[7][7]?.firstElementChild
+        : rook = boardMatrix[0][7]?.firstElementChild;
+    castlingRMove(newKingPosition, rook);
+}
+function castlingLMove(newKingPosition, rook) {
+    for (let j = 0; j < 64; j++) {
+        squares[j].removeEventListener('click', castlingLHandleClick);
+    }
     newKingPosition.appendChild(pieceInBoard);
-    boardMatrix[7][2].appendChild(rook);
+    boardMatrix[7][3].appendChild(rook);
     pieceInBoard.classList.add('moved');
     audio.play(); // toca o audio ao mover uma peça
     jogadas++;
     for (let j = 0; j < 64; j++) {
         squares[j].classList.remove('select-from');
-        squares[j].removeEventListener('click', moveToHandleClick);
+        squares[j].removeEventListener('click', castlingLHandleClick);
     }
     abbleToMove();
 }
-function castlingHandleClick() {
-    let newKingPosition = this;
-    let rook = boardMatrix[7][0].firstElementChild;
-    castlingMove(newKingPosition, rook);
+function castlingRMove(newKingPosition, rook) {
+    for (let j = 0; j < 64; j++) {
+        squares[j].removeEventListener('click', castlingLHandleClick);
+    }
+    newKingPosition.appendChild(pieceInBoard);
+    pieceInBoard.classList.contains('white')
+        ? boardMatrix[7][5].appendChild(rook)
+        : boardMatrix[0][5].appendChild(rook);
+    pieceInBoard.classList.add('moved');
+    audio.play(); // toca o audio ao mover uma peça
+    jogadas++;
+    for (let j = 0; j < 64; j++) {
+        squares[j].classList.remove('select-from');
+        squares[j].removeEventListener('click', castlingRHandleClick);
+    }
+    abbleToMove();
 }
 export function moveKing(selectedFrom) {
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild;
@@ -299,7 +345,19 @@ export function moveKing(selectedFrom) {
             }
         }
         if (possible) {
-            boardMatrix[selectedFrom[1]]?.[selectedFrom[0] - 3]?.addEventListener('click', castlingHandleClick);
+            boardMatrix[selectedFrom[1]]?.[selectedFrom[0] - 2]?.addEventListener('click', castlingLHandleClick);
+        }
+    }
+    if (!(pieceInBoard.classList.contains('moved')) && !(boardMatrix[selectedFrom[1]]?.[selectedFrom[0] + 3]?.classList.contains('moved'))) {
+        let possible = true;
+        for (let i = 1; i < 3; i++) {
+            if (boardMatrix[selectedFrom[1]]?.[selectedFrom[0] + i]?.childElementCount) {
+                possible = false;
+                i = 3;
+            }
+        }
+        if (possible) {
+            boardMatrix[selectedFrom[1]]?.[selectedFrom[0] + 2]?.addEventListener('click', castlingRHandleClick);
         }
     }
 }

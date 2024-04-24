@@ -58,6 +58,9 @@ export function moveToHandleClick(this: HTMLElement){
 
 
 export function movePawn(selectedFrom: number[]){
+    for(let j = 0; j < 64; j++){
+        squares[j].removeEventListener('click', moveToHandleClick);
+    }
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
      
     if(pieceInBoard.classList.contains('white') && pieceInBoard.classList.contains('moved')){
@@ -101,6 +104,9 @@ export function movePawn(selectedFrom: number[]){
 
 
 export function moveBishop(selectedFrom: number[]){
+    for(let j = 0; j < 64; j++){
+        squares[j].removeEventListener('click', moveToHandleClick);
+    }
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
 
     let cimaEsquerda = false;
@@ -151,6 +157,9 @@ export function moveBishop(selectedFrom: number[]){
 }
 
 export function moveQueen(selectedFrom: number[]){
+    for(let j = 0; j < 64; j++){
+        squares[j].removeEventListener('click', moveToHandleClick);
+    }
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
 
     let cima = false;
@@ -236,6 +245,9 @@ export function moveQueen(selectedFrom: number[]){
 }
 
 export function moveKnight(selectedFrom: number[]){
+    for(let j = 0; j < 64; j++){
+        squares[j].removeEventListener('click', moveToHandleClick);
+    }
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
     
     //pra cima
@@ -251,7 +263,10 @@ export function moveKnight(selectedFrom: number[]){
     boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0]+2]?.addEventListener('click', moveToHandleClick);
 }
 
-export function moveRook(selectedFrom: number[]){    
+export function moveRook(selectedFrom: number[]){   
+    for(let j = 0; j < 64; j++){
+        squares[j].removeEventListener('click', moveToHandleClick);
+    } 
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
     
     let cima = false;
@@ -300,9 +315,32 @@ export function moveRook(selectedFrom: number[]){
     }
 }
 
-function castlingMove(newKingPosition: HTMLElement, rook: HTMLElement){
+
+function castlingLHandleClick(this: HTMLElement){
+    let newKingPosition = this;
+    let rook: HTMLElement;
+
+    pieceInBoard.firstElementChild?.classList.contains('white') 
+     ? rook = boardMatrix[7][0].firstElementChild as HTMLElement
+     : rook = boardMatrix[0][0].firstElementChild as HTMLElement;
+    castlingLMove(newKingPosition, rook);
+}
+
+function castlingRHandleClick(this: HTMLElement){
+    let newKingPosition = this;
+    let rook: HTMLElement;
+    pieceInBoard.classList.contains('white') 
+     ? rook = boardMatrix[7][7]?.firstElementChild as HTMLElement
+     : rook = boardMatrix[0][7]?.firstElementChild as HTMLElement;
+    castlingRMove(newKingPosition, rook);
+}
+
+function castlingLMove(newKingPosition: HTMLElement, rook: HTMLElement){
+    for(let j = 0; j < 64; j++){
+        squares[j].removeEventListener('click', castlingLHandleClick);
+    }
     newKingPosition.appendChild(pieceInBoard);
-    boardMatrix[7][2].appendChild(rook);
+    boardMatrix[7][3].appendChild(rook);
 
     pieceInBoard.classList.add('moved');
 
@@ -311,16 +349,33 @@ function castlingMove(newKingPosition: HTMLElement, rook: HTMLElement){
     
     for(let j = 0; j < 64; j++){
         squares[j].classList.remove('select-from');
-        squares[j].removeEventListener('click', moveToHandleClick);
+        squares[j].removeEventListener('click', castlingLHandleClick);
     }
     
     abbleToMove();
 }
 
-function castlingHandleClick(this: HTMLElement){
-    let newKingPosition = this;
-    let rook = boardMatrix[7][0].firstElementChild as HTMLElement;
-    castlingMove(newKingPosition, rook);
+function castlingRMove(newKingPosition: HTMLElement, rook: HTMLElement){
+    for(let j = 0; j < 64; j++){
+        squares[j].removeEventListener('click', castlingLHandleClick);
+    }
+    newKingPosition.appendChild(pieceInBoard);
+
+    pieceInBoard.classList.contains('white') 
+    ? boardMatrix[7][5].appendChild(rook)
+    : boardMatrix[0][5].appendChild(rook);
+
+    pieceInBoard.classList.add('moved');
+
+    audio.play(); // toca o audio ao mover uma peça
+    jogadas++;
+    
+    for(let j = 0; j < 64; j++){
+        squares[j].classList.remove('select-from');
+        squares[j].removeEventListener('click', castlingRHandleClick);
+    }
+    
+    abbleToMove();
 }
 
 export function moveKing(selectedFrom: number[]){
@@ -335,6 +390,7 @@ export function moveKing(selectedFrom: number[]){
     boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
     boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
 
+    
     if(!(pieceInBoard.classList.contains('moved')) && !(boardMatrix[selectedFrom[1]]?.[selectedFrom[0] - 4]?.classList.contains('moved'))){
 
         let possible = true;
@@ -347,7 +403,24 @@ export function moveKing(selectedFrom: number[]){
         }
 
         if(possible){
-            boardMatrix[selectedFrom[1]]?.[selectedFrom[0] - 3]?.addEventListener('click', castlingHandleClick);
+            boardMatrix[selectedFrom[1]]?.[selectedFrom[0] - 2]?.addEventListener('click', castlingLHandleClick);
+        }
+    }
+
+    if(!(pieceInBoard.classList.contains('moved')) && !(boardMatrix[selectedFrom[1]]?.[selectedFrom[0] + 3]?.classList.contains('moved'))){
+
+        let possible = true;
+
+        for(let i = 1; i < 3; i++){
+            if(boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+i]?.childElementCount){
+                possible = false;
+                i = 3
+            }
+        }
+
+        if(possible){
+            boardMatrix[selectedFrom[1]]?.[selectedFrom[0] + 2]?.addEventListener('click', castlingRHandleClick);
         }
     }
 }
+
