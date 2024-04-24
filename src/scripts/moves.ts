@@ -1,3 +1,5 @@
+import { BatteryMedium } from "../../../../node_modules/lucide/dist/lucide.js";
+import { HtmlContext } from "../../../../node_modules/next/dist/server/future/route-modules/app-page/vendored/contexts/entrypoints.js";
 import { boardMatrix, squares } from "./initialize.js";
 import { abbleToMove } from "./script.js";
 
@@ -298,6 +300,29 @@ export function moveRook(selectedFrom: number[]){
     }
 }
 
+function castlingMove(newKingPosition: HTMLElement, rook: HTMLElement){
+    newKingPosition.appendChild(pieceInBoard);
+    boardMatrix[7][2].appendChild(rook);
+
+    pieceInBoard.classList.add('moved');
+
+    audio.play(); // toca o audio ao mover uma peça
+    jogadas++;
+    
+    for(let j = 0; j < 64; j++){
+        squares[j].classList.remove('select-from');
+        squares[j].removeEventListener('click', moveToHandleClick);
+    }
+    
+    abbleToMove();
+}
+
+function castlingHandleClick(this: HTMLElement){
+    let newKingPosition = this;
+    let rook = boardMatrix[7][0].firstElementChild as HTMLElement;
+    castlingMove(newKingPosition, rook);
+}
+
 export function moveKing(selectedFrom: number[]){
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild as HTMLElement;
 
@@ -309,4 +334,20 @@ export function moveKing(selectedFrom: number[]){
     boardMatrix[selectedFrom[1]+1]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
     boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-1]?.addEventListener('click', moveToHandleClick);
     boardMatrix[selectedFrom[1]]?.[selectedFrom[0]+1]?.addEventListener('click', moveToHandleClick);
+
+    if(!(pieceInBoard.classList.contains('moved')) && !(boardMatrix[selectedFrom[1]]?.[selectedFrom[0] - 4]?.classList.contains('moved'))){
+
+        let possible = true;
+
+        for(let i = 1; i < 4; i++){
+            if(boardMatrix[selectedFrom[1]]?.[selectedFrom[0]-i]?.childElementCount){
+                possible = false;
+                i = 4;
+            }
+        }
+
+        if(possible){
+            boardMatrix[selectedFrom[1]]?.[selectedFrom[0] - 3]?.addEventListener('click', castlingHandleClick);
+        }
+    }
 }

@@ -67,7 +67,7 @@ export function abbleToMove(){
             boardMatrix[i].forEach((item) => {
                 item.firstElementChild?.classList.contains('white') 
                     ? item.addEventListener('click', handleClick)
-                    : item.removeEventListener('click', handleClick)
+                    : item.removeEventListener('click', handleClick);
             })
         }
     } else if (defineTime() === 'black'){
@@ -75,7 +75,7 @@ export function abbleToMove(){
             boardMatrix[i].forEach((item) => {
                 item.firstElementChild?.classList.contains('black') 
                     ? item.addEventListener('click', handleClick)
-                    : item.removeEventListener('click', handleClick)
+                    : item.removeEventListener('click', handleClick);
             })
         }
     }

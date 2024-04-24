@@ -263,6 +263,23 @@ export function moveRook(selectedFrom) {
         }
     }
 }
+function castlingMove(newKingPosition, rook) {
+    newKingPosition.appendChild(pieceInBoard);
+    boardMatrix[7][2].appendChild(rook);
+    pieceInBoard.classList.add('moved');
+    audio.play(); // toca o audio ao mover uma peça
+    jogadas++;
+    for (let j = 0; j < 64; j++) {
+        squares[j].classList.remove('select-from');
+        squares[j].removeEventListener('click', moveToHandleClick);
+    }
+    abbleToMove();
+}
+function castlingHandleClick() {
+    let newKingPosition = this;
+    let rook = boardMatrix[7][0].firstElementChild;
+    castlingMove(newKingPosition, rook);
+}
 export function moveKing(selectedFrom) {
     pieceInBoard = boardMatrix[selectedFrom[1]][selectedFrom[0]].firstChild;
     boardMatrix[selectedFrom[1] - 1]?.[selectedFrom[0] - 1]?.addEventListener('click', moveToHandleClick);
@@ -273,4 +290,16 @@ export function moveKing(selectedFrom) {
     boardMatrix[selectedFrom[1] + 1]?.[selectedFrom[0]]?.addEventListener('click', moveToHandleClick);
     boardMatrix[selectedFrom[1]]?.[selectedFrom[0] - 1]?.addEventListener('click', moveToHandleClick);
     boardMatrix[selectedFrom[1]]?.[selectedFrom[0] + 1]?.addEventListener('click', moveToHandleClick);
+    if (!(pieceInBoard.classList.contains('moved')) && !(boardMatrix[selectedFrom[1]]?.[selectedFrom[0] - 4]?.classList.contains('moved'))) {
+        let possible = true;
+        for (let i = 1; i < 4; i++) {
+            if (boardMatrix[selectedFrom[1]]?.[selectedFrom[0] - i]?.childElementCount) {
+                possible = false;
+                i = 4;
+            }
+        }
+        if (possible) {
+            boardMatrix[selectedFrom[1]]?.[selectedFrom[0] - 3]?.addEventListener('click', castlingHandleClick);
+        }
+    }
 }
