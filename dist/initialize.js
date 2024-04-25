@@ -13,31 +13,31 @@ export function filler() {
     for (let i = 0; i < 8; i++) {
         let piece = document.createElement('img');
         if (squares[i].classList.contains('t')) {
-            piece.setAttribute('src', './assets/brook.png');
+            piece.setAttribute('src', './src/assets/brook.png');
             piece.setAttribute('id', 'rook');
             piece.setAttribute('class', 'black');
             squares[i].appendChild(piece);
         }
         else if (squares[i].classList.contains('k')) {
-            piece.setAttribute('src', './assets/bknight.png');
+            piece.setAttribute('src', './src/assets/bknight.png');
             piece.setAttribute('id', 'knight');
             piece.setAttribute('class', 'black');
             squares[i].appendChild(piece);
         }
         else if (squares[i].classList.contains('b')) {
-            piece.setAttribute('src', './assets/bbishop.png');
+            piece.setAttribute('src', './src/assets/bbishop.png');
             piece.setAttribute('id', 'bishop');
             piece.setAttribute('class', 'black');
             squares[i].appendChild(piece);
         }
         else if (squares[i].classList.contains('ki')) {
-            piece.setAttribute('src', './assets/bking.png');
+            piece.setAttribute('src', './src/assets/bking.png');
             piece.setAttribute('id', 'king');
             piece.setAttribute('class', 'black');
             squares[i].appendChild(piece);
         }
         else if (squares[i].classList.contains('q')) {
-            piece.setAttribute('src', './assets/bqueen.png');
+            piece.setAttribute('src', './src/assets/bqueen.png');
             piece.setAttribute('id', 'queen');
             piece.setAttribute('class', 'black');
             squares[i].appendChild(piece);
@@ -45,7 +45,7 @@ export function filler() {
     }
     for (let i = 8; i < 16; i++) {
         let piece = document.createElement('img');
-        piece.setAttribute('src', './assets/bpawn.png');
+        piece.setAttribute('src', './src/assets/bpawn.png');
         piece.setAttribute('id', 'pawn');
         piece.setAttribute('class', 'black');
         squares[i].appendChild(piece);
@@ -53,31 +53,31 @@ export function filler() {
     for (let i = 63; i > 55; i--) {
         let piece = document.createElement('img');
         if (squares[i].classList.contains('t')) {
-            piece.setAttribute('src', './assets/wrook.png');
+            piece.setAttribute('src', './src/assets/wrook.png');
             piece.setAttribute('id', 'rook');
             piece.setAttribute('class', 'white');
             squares[i].appendChild(piece);
         }
         else if (squares[i].classList.contains('k')) {
-            piece.setAttribute('src', './assets/wknight.png');
+            piece.setAttribute('src', './src/assets/wknight.png');
             piece.setAttribute('id', 'knight');
             piece.setAttribute('class', 'white');
             squares[i].appendChild(piece);
         }
         else if (squares[i].classList.contains('b')) {
-            piece.setAttribute('src', './assets/wbishop.png');
+            piece.setAttribute('src', './src/assets/wbishop.png');
             piece.setAttribute('id', 'bishop');
             piece.setAttribute('class', 'white');
             squares[i].appendChild(piece);
         }
         else if (squares[i].classList.contains('ki')) {
-            piece.setAttribute('src', './assets/wking.png');
+            piece.setAttribute('src', './src/assets/wking.png');
             piece.setAttribute('id', 'king');
             piece.setAttribute('class', 'white');
             squares[i].appendChild(piece);
         }
         else if (squares[i].classList.contains('q')) {
-            piece.setAttribute('src', './assets/wqueen.png');
+            piece.setAttribute('src', './src/assets/wqueen.png');
             piece.setAttribute('id', 'queen');
             piece.setAttribute('class', 'white');
             squares[i].appendChild(piece);
@@ -85,7 +85,7 @@ export function filler() {
     }
     for (let i = 55; i > 47; i--) {
         let piece = document.createElement('img');
-        piece.setAttribute('src', './assets/wpawn.png');
+        piece.setAttribute('src', './src/assets/wpawn.png');
         piece.setAttribute('id', 'pawn');
         piece.setAttribute('class', 'white');
         squares[i].appendChild(piece);

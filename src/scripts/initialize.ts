@@ -88,7 +88,7 @@ export function filler(){
     
     for(let i = 55; i > 47; i--){
         let piece : HTMLElement = document.createElement('img');
-        piece.setAttribute('src', './assets/wpawn.png');
+        piece.setAttribute('src', './src/assets/wpawn.png');
         piece.setAttribute('id', 'pawn');
         piece.setAttribute('class', 'white');
         squares[i].appendChild(piece);
