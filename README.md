@@ -35,4 +35,4 @@ Projeto de Aplicação em typeScript para jogar Xadrez
 
 # Licença
 
-Xadrez em TypeScript possuí a <a href="LICENSE">licença MIT</a>.
+TypeChess é licenciado pelo <a href="LICENSE">MIT</a>.
