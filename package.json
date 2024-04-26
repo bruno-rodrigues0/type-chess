@@ -1,12 +1,17 @@
 {
-  "name": "type-chess",
-  "version": "1.1.0",
+  "name": "my-electron-app",
+  "version": "1.0.0",
   "description": "",
-  "main": "script.js",
-  "type": "module",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "build": "electron-packager . --overwrite"
   },
-  "author": "Bruno Rodrigues",
-  "license": "MIT"
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^30.0.1",
+    "electron-packager": "^17.1.2"
+  }
 }

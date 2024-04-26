@@ -1,5 +1,3 @@
-import { BatteryMedium } from "../../../../node_modules/lucide/dist/lucide.js";
-import { HtmlContext } from "../../../../node_modules/next/dist/server/future/route-modules/app-page/vendored/contexts/entrypoints.js";
 import { boardMatrix, squares } from "./initialize.js";
 import { abbleToMove } from "./script.js";
 

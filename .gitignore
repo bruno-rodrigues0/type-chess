@@ -1,2 +1,3 @@
 /dist
-.vercel
+/node_modules
+/my-electron-app-win32-x64
