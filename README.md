@@ -1,4 +1,4 @@
-# Xadrez em TypeScript
+# TypeChess
 
 Projeto de Aplicação em typeScript para jogar Xadrez
 
@@ -6,18 +6,26 @@ Projeto de Aplicação em typeScript para jogar Xadrez
 
 - [Título](#Xadrez-em-TypeScript)
 - [Índice](#índice)
-- [Descrição do Projeto](#📖descrição-do-projeto)
+- [Descrição do Projeto](#Descrição-do-projeto)
 - [Status do Projeto](#Status-do-Projeto)
-  <!-- * [Funcionalidades e Demonstração da Aplicação](#funcionalidades-e-demonstração-da-aplicação) -->
-  <!-- - [Acesso ao Projeto](#acesso-ao-projeto) -->
+- [Acesso ao Projeto](#acesso-ao-projeto)
 - [Tecnologias utilizadas](#Tecnologias-Utilizadas)
 - [Licença](#Licença)
+
+# Descrição do projeto
+
+<p align="justify">O projeto TypeChess é uma aplicação web feita em TypeScript, HTML e CSS, atualmente em pré-lançamento. Neste estágio alfa, o jogo permite movimentações básicas das peças e inclui a funcionalidade de capturar peças adversárias. O objetivo do projeto é criar uma experiência de xadrez interativa para os usuários, com futuras implementações planejadas para aprimorar a jogabilidade.</p>
 
 # Status do Projeto
 
 <p align="center">
 <img loading="lazy" src="https://img.shields.io/static/v1?label=STATUS&message=EM-DESEMVOLVIMENTO&color=RED&style=for-the-badge"/>
 </p>
+
+# Acesso ao projeto
+
+- [Site](https://type-chess.vercel.app)
+- [Aplicativo em Pre-release ](https://github.com/bruno-rodrigues0/type-chess/tags)
 
 # Tecnologias Utilizadas
 
